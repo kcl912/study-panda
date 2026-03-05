@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>補習小天地 StudyPanda</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <header class="hero reveal">
+        <h1 id="app-title">補習小天地 / StudyPanda</h1>
+        <p id="app-subtitle">小學英文數學練習平台</p>
+      </header>
+
+      <section class="panel reveal delay-1">
+        <div class="control-grid">
+          <label class="field">
+            <span id="language-label">語言</span>
+            <select id="language-select" aria-label="Language"></select>
+          </label>
+
+          <label class="field">
+            <span id="subject-label">科目</span>
+            <select id="subject-select" aria-label="Subject"></select>
+          </label>
+
+          <label class="field">
+            <span id="grade-label">年級</span>
+            <select id="grade-select" aria-label="Grade"></select>
+          </label>
+        </div>
+
+        <button id="start-btn" class="btn-primary" type="button">開始練習</button>
+      </section>
+
+      <section class="panel progress reveal delay-2">
+        <h2 id="progress-title">學習進度</h2>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p id="sessions-label">總練習次數</p>
+            <strong id="sessions-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <p id="average-label">平均分數</p>
+            <strong id="average-value">0%</strong>
+          </article>
+          <article class="stat-card">
+            <p id="best-label">目前選項最佳分數</p>
+            <strong id="best-value">-</strong>
+          </article>
+          <article class="stat-card">
+            <p id="last-label">最近一次</p>
+            <strong id="last-value">-</strong>
+          </article>
+        </div>
+      </section>
+
+      <section id="quiz-section" class="panel hidden reveal delay-3">
+        <div class="quiz-header">
+          <h2 id="quiz-title">題目</h2>
+          <p id="quiz-tip">請完成 10 題後提交。</p>
+        </div>
+
+        <form id="quiz-form" novalidate>
+          <div id="question-list" class="question-list"></div>
+          <button id="submit-btn" class="btn-primary" type="submit">提交答案</button>
+        </form>
+      </section>
+
+      <section id="result-section" class="panel hidden">
+        <h2 id="result-title">結果</h2>
+        <p id="result-text"></p>
+        <div id="result-feedback" class="result-feedback"></div>
+        <div id="result-breakdown" class="result-breakdown"></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
