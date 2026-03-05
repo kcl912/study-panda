@@ -28,6 +28,12 @@ const texts = {
     p4: "小四",
     p5: "小五",
     p6: "小六",
+    membershipTitle: "會員計劃",
+    mockExamTitle: "模擬考試",
+    mockExamTip: "高級版專屬功能 - 選擇年級進行模擬考試",
+    examStartBtn: "開始模擬考試 (高級版)",
+    examSubject: "科目",
+    examGrade: "年級",
   },
   zhHans: {
     appTitle: "补习小天地 / StudyPanda",
@@ -55,6 +61,12 @@ const texts = {
     p4: "小四",
     p5: "小五",
     p6: "小六",
+    membershipTitle: "会员计划",
+    mockExamTitle: "模拟考试",
+    mockExamTip: "高级版专属功能 - 选择年级进行模拟考试",
+    examStartBtn: "开始模拟考试 (高级版)",
+    examSubject: "科目",
+    examGrade: "年级",
   },
   en: {
     appTitle: "StudyPanda",
@@ -82,6 +94,12 @@ const texts = {
     p4: "P4",
     p5: "P5",
     p6: "P6",
+    membershipTitle: "Membership",
+    mockExamTitle: "Mock Exam",
+    mockExamTip: "Premium feature - Select grade to take mock exam",
+    examStartBtn: "Start Mock Exam (Premium)",
+    examSubject: "Subject",
+    examGrade: "Grade",
   },
 };
 
@@ -112,6 +130,8 @@ function bindEvents() {
   });
   document.getElementById("start-btn").addEventListener("click", startQuiz);
   document.getElementById("quiz-form").addEventListener("submit", submitQuiz);
+  // Exam events
+  document.getElementById("exam-start-btn").addEventListener("click", startMockExam);
 }
 
 function initLanguage() {
@@ -162,11 +182,35 @@ function initUI() {
   });
 }
 
+function initExamUI() {
+  // Exam Subject
+  const examSubjectSelect = document.getElementById("exam-subject-select");
+  if (examSubjectSelect) {
+    examSubjectSelect.innerHTML = "";
+    ["math", "english"].forEach((sub) => {
+      const opt = document.createElement("option");
+      opt.value = sub;
+      opt.textContent = texts[currentLang][sub];
+      examSubjectSelect.appendChild(opt);
+    });
+  }
+  // Exam Grade
+  const examGradeSelect = document.getElementById("exam-grade-select");
+  if (examGradeSelect) {
+    examGradeSelect.innerHTML = "";
+    ["p1", "p2", "p3", "p4", "p5", "p6"].forEach((g) => {
+      const opt = document.createElement("option");
+      opt.value = g;
+      opt.textContent = texts[currentLang][g];
+      examGradeSelect.appendChild(opt);
+    });
+  }
+}
+
 function updateTexts() {
   const t = texts[currentLang];
   document.getElementById("app-title").textContent = t.appTitle;
   document.getElementById("app-subtitle").textContent = t.appSubtitle;
-  document.getElementById("language-label").textContent = t.language;
   document.getElementById("subject-label").textContent = t.subject;
   document.getElementById("grade-label").textContent = t.grade;
   document.getElementById("start-btn").textContent = t.startBtn;
@@ -179,8 +223,28 @@ function updateTexts() {
   document.getElementById("quiz-tip").textContent = t.quizTip;
   document.getElementById("submit-btn").textContent = t.submitBtn;
   document.getElementById("result-title").textContent = t.resultTitle;
+  // Membership & Exam texts
+  if (document.getElementById("membership-title")) {
+    document.getElementById("membership-title").textContent = t.membershipTitle;
+  }
+  if (document.getElementById("mockexam-title")) {
+    document.getElementById("mockexam-title").textContent = t.mockExamTitle;
+  }
+  if (document.getElementById("mockexam-tip")) {
+    document.getElementById("mockexam-tip").textContent = t.mockExamTip;
+  }
+  if (document.getElementById("exam-start-btn")) {
+    document.getElementById("exam-start-btn").textContent = t.examStartBtn;
+  }
+  if (document.getElementById("exam-subject-label")) {
+    document.getElementById("exam-subject-label").textContent = t.examSubject;
+  }
+  if (document.getElementById("exam-grade-label")) {
+    document.getElementById("exam-grade-label").textContent = t.examGrade;
+  }
   // Update selects
   initUI();
+  initExamUI();
 }
 
 // ============ QUIZ LOGIC ============
@@ -189,6 +253,20 @@ function startQuiz() {
   renderQuestions();
   document.getElementById("quiz-section").classList.remove("hidden");
   document.getElementById("result-section").classList.add("hidden");
+}
+
+function startMockExam() {
+  const examSubject = document.getElementById("exam-subject-select").value;
+  const examGrade = document.getElementById("exam-grade-select").value;
+  // Mock exam has 25 questions
+  questions = generateQuestions(examSubject, examGrade, currentLang, 25);
+  renderQuestions();
+  document.getElementById("quiz-section").classList.remove("hidden");
+  document.getElementById("result-section").classList.add("hidden");
+  // Update quiz title to show it's a mock exam
+  const t = texts[currentLang];
+  document.getElementById("quiz-title").textContent = t.mockExamTitle;
+  document.getElementById("quiz-tip").textContent = "請完成 25 題模擬考試題目。";
 }
 
 function generateQuestions(subject, grade, lang, count) {

@@ -10,6 +10,12 @@
     <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
     <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
 
+    <header class="top-bar">
+      <div class="language-switcher">
+        <select id="language-select" aria-label="Language"></select>
+      </div>
+    </header>
+
     <main class="app-shell">
       <header class="hero reveal">
         <img src="https://cdn.leonardo.ai/users/77eec98e-5852-4b14-b29f-62872f0655f2/generations/090555e8-8e62-4705-8f51-f87dabfc47c6/segments/1:1:1/Lucid_Origin_Cute_panda_mascot_wearing_glasses_studying_with_b_0.jpg" alt="StudyPanda Panda" style="width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
@@ -19,11 +25,6 @@
 
       <section class="panel reveal delay-1">
         <div class="control-grid">
-          <label class="field">
-            <span id="language-label">語言</span>
-            <select id="language-select" aria-label="Language"></select>
-          </label>
-
           <label class="field">
             <span id="subject-label">科目</span>
             <select id="subject-select" aria-label="Subject"></select>
@@ -36,6 +37,60 @@
         </div>
 
         <button id="start-btn" class="btn-primary" type="button">開始練習</button>
+      </section>
+
+      <!-- Membership Section -->
+      <section class="panel membership-panel reveal delay-2">
+        <h2 id="membership-title">會員計劃</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>免費版</h3>
+            <p class="price">$0</p>
+            <ul>
+              <li>✅ 每日 10 題</li>
+              <li>✅ 基本練習</li>
+              <li>❌ 模擬考試</li>
+              <li>❌ 進度報告</li>
+            </ul>
+          </div>
+          <div class="pricing-card featured">
+            <h3>基本版</h3>
+            <p class="price">$49/月</p>
+            <ul>
+              <li>✅ 無限題目</li>
+              <li>✅ 錯題簿</li>
+              <li>❌ 模擬考試</li>
+              <li>❌ 進度報告</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <h3>高級版</h3>
+            <p class="price">$99/月</p>
+            <ul>
+              <li>✅ 無限題目</li>
+              <li>✅ 錯題簿</li>
+              <li>✅ 模擬考試</li>
+              <li>✅ 進度報告</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mock Exam Section -->
+      <section class="panel mock-exam-panel reveal delay-3">
+        <h2 id="mockexam-title">模擬考試</h2>
+        <p class="mockexam-tip">高级版专属功能 - 選擇年級進行模擬考試</p>
+        <div class="control-grid">
+          <label class="field">
+            <span id="exam-subject-label">科目</span>
+            <select id="exam-subject-select" aria-label="Exam Subject"></select>
+          </label>
+          <label class="field">
+            <span id="exam-grade-label">年級</span>
+            <select id="exam-grade-select" aria-label="Exam Grade"></select>
+          </label>
+        </div>
+        <button id="exam-start-btn" class="btn-primary" type="button">開始模擬考試 (高級版)</button>
       </section>
 
       <section class="panel progress reveal delay-2">
